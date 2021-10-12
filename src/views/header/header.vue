@@ -21,9 +21,9 @@
             @mouseenter="move"
             @mouseleave="out"
           >
-            购物车({{commodity.length}})
+            购物车({{ commodity.length }})
             <div class="car">
-              <shoppingcar :commodity ="commodity"></shoppingcar>
+              <shoppingcar :commodity="commodity"></shoppingcar>
             </div>
           </div>
         </div>
@@ -38,7 +38,8 @@ export default {
     return {
       shoppcar_active: false,
       background: require("../../img/head-background.jpg"),
-
+      timer: null,
+      timer2: null,
       shopcarnum: "0",
       shoppingcar: [{}],
 
@@ -101,24 +102,27 @@ export default {
   components: {
     shoppingcar: require("../shoppingCar/shopping_car.vue").default,
   },
-  mounted(){
-          this.shopping_car_init()
+  mounted() {
+    this.shopping_car_init();
   },
   methods: {
-       /* 读取用户购物车 */
+    /* 读取用户购物车 */
     shopping_car_init() {
+      // console.log(1);
       this.$store.dispatch("shopping_car/goshopping_car_init");
     },
     go_login() {
       this.$router.push("/login");
     },
     move() {
-      setTimeout(() => {
+      clearTimeout(this.timer);
+      this.timer = setTimeout(() => {
         this.shoppcar_active = true;
       }, 100);
     },
     out() {
-      setTimeout(() => {
+      clearTimeout(this.timer2);
+      this.timer2 = setTimeout(() => {
         this.shoppcar_active = false;
       }, 100);
     },
@@ -127,7 +131,7 @@ export default {
     user_Name() {
       return localStorage.login_name;
     },
-      commodity() {
+    commodity() {
       return this.$store.getters.getShopping_car;
     },
   },
@@ -139,7 +143,7 @@ export default {
   margin: 0;
   padding: 0;
 }
-a{
+a {
   text-decoration: none;
 }
 ::-webkit-scrollbar {
@@ -218,12 +222,12 @@ a{
             position: absolute;
             width: 360px;
             top: 100%;
-            left: -243px;
+            left: -250px;
             height: 0;
             background: white;
             font-size: 12px;
             transition: all 0.5s;
-             overflow: auto;
+            overflow: auto;
           }
         }
         .shoppingcar {
@@ -241,7 +245,7 @@ a{
             top: 100%;
             position: absolute;
             width: 360px;
-            left: -243px;
+            left: -250px;
             min-height: 78px;
             max-height: 300px;
             overflow: auto;
@@ -254,7 +258,6 @@ a{
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.14);
             transition: all 0.5s;
             z-index: 100;
-            
           }
         }
       }

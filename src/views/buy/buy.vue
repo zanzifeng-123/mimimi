@@ -196,18 +196,6 @@ export default {
     commodity_Money() {
       this.money.type_money = 0;
       this.money.serve_money = 0;
-      // for (let i = 0; i < this.list.product_type.length; i++) {
-      //   if (
-      //     this.list.product_type[i].type.filter(
-      //       (item) => item.active == true
-      //     )[0].active
-      //   ) {
-      //     this.money.type_money += this.list.product_type[i].type.filter(
-      //       (item) => item.active == true
-      //     )[0].money;
-      //     // console.log(this.money.type_money);
-      //   }
-      // }
       this.list.product_type.forEach((item) => {
         item.type.forEach((ro) => {
           if (ro.active) {

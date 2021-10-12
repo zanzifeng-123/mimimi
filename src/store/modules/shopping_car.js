@@ -13,12 +13,15 @@ export default {
                     if (JSON.parse(localStorage.getItem(localStorage.key(i))).admin == localStorage.login_name) {
                         if (JSON.parse(localStorage.getItem(localStorage.key(i))).commodity) {
                             state.commodity = JSON.parse(localStorage.getItem(localStorage.key(i))).commodity
+                        } else {
+                            state.commodity = []
                         }
                     }
                 }
             }
             // console.log(state.commodity);
         },
+        /* 加入购物车 */
         goshopping_car(state, commodity) {
             for (let i = 0; i < localStorage.length; i++) {
                 if (localStorage.key(i).indexOf('user') != -1) {
@@ -26,8 +29,8 @@ export default {
                     if (JSON.parse(localStorage.getItem(localStorage.key(i))).admin == localStorage.login_name) {
                         /* 如果该用户没有加购过物品 */
                         if (!JSON.parse(localStorage.getItem(localStorage.key(i))).commodity) {
-                            user_message = Object.assign(JSON.parse(localStorage.getItem(localStorage.key(i))), { commodity: [commodity] })
-                            console.log(1);
+                            state.commodity.push(commodity)
+                            user_message = Object.assign(JSON.parse(localStorage.getItem(localStorage.key(i))), { commodity: state.commodity })
                         } else {
                             /* 如果用户购物车有信息 */
                             state.commodity = JSON.parse(localStorage.getItem(localStorage.key(i))).commodity
@@ -43,6 +46,7 @@ export default {
                 }
             }
         },
+        /* 删除购物车 */
         delete_commodity(state, index) {
             state.commodity.splice(index, 1)
             for (let i = 0; i < localStorage.length; i++) {
