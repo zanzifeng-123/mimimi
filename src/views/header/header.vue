@@ -118,13 +118,13 @@ export default {
       clearTimeout(this.timer);
       this.timer = setTimeout(() => {
         this.shoppcar_active = true;
-      }, 100);
+      }, 200);
     },
     out() {
       clearTimeout(this.timer2);
       this.timer2 = setTimeout(() => {
         this.shoppcar_active = false;
-      }, 100);
+      }, 200);
     },
   },
   computed: {
